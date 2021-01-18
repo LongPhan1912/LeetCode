@@ -37,3 +37,19 @@ def maximum69Number (self, num: int) -> int:
 
 # Time complexity: O(n)
 # Space complexity: O(1)
+
+# 29. Divide Two Integers (Medium)
+# I can't do bit manipulation lol
+def divide(self, dividend: int, divisor: int) -> int:
+    quotient = dividend / divisor
+    
+    res = ceil(quotient) if quotient < 0 else floor(quotient)
+    if res >= 2**31:
+        return res - 1
+    elif res < -2**31:
+        return -2**31
+    else:
+        return res
+
+# Time complexity: O(1)
+# Space complexity: O(1)

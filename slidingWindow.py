@@ -1,3 +1,37 @@
+# 1423. Maximum Points You Can Obtain from Cards (Medium)
+def maxScore(self, cardPoints: List[int], k: int) -> int:
+    n = len(cardPoints)
+    total = sum(cardPoints)
+    if n == k:
+        return total
+    
+    rem = n - k
+    subArr = 0
+    maxSum = 0
+    for i in range(n):
+        if i < rem:
+            subArr += cardPoints[i]
+        else:
+            if i == rem:
+                maxSum = total - subArr
+            subArr += cardPoints[i] - cardPoints[i-rem]
+            maxSum = max(maxSum, total - subArr)
+    
+    return maxSum
+
+# A shorter solution
+def maxScore(self, cardPoints: List[int], k: int) -> int:
+    n = len(cardPoints)
+    m = n - k
+    min_sum = s = sum(cardPoints[:m])
+    for i in range(k):
+        s = s - cardPoints[i] + cardPoints[m + i]
+        min_sum = min(min_sum, s)
+    return sum(cardPoints) - min_sum
+
+# Time complexity: O(n)
+# Space complexity: O(1)
+
 # 1052. Grumpy Bookstore Owner (Medium)
 def maxSatisfied(self, customers: List[int], grumpy: List[int], X: int) -> int:
     n = len(grumpy)
