@@ -1,3 +1,57 @@
+// 1721. Swapping Nodes in a Linked List (Medium)
+ListNode* swapNodes(ListNode* head, int k) {
+    if (head == NULL || head->next == NULL) { return head; }
+    vector<int> array;
+    
+    ListNode* curr = head;
+    while (curr != NULL) {
+        array.push_back(curr->val);
+        curr = curr->next;
+    }
+    int inverse = array.size() - k;
+    swap(array[k-1], array[inverse]);
+    
+    curr = new ListNode(array[0]);
+    ListNode* newHead = curr;
+    for (int i = 1; i < array.size(); i++) {
+        ListNode* nextNode = new ListNode(array.at(i), NULL);
+        curr->next = nextNode;
+        curr = nextNode;
+    }
+    head = newHead;
+    return head;
+}
+// Time complexity: O(N)
+// Space complexity: O(N)
+
+// memory-efficient method (you can swap the values of the nodes in C++)
+ListNode* swapNodes(ListNode* head, int k) {
+    if (head == NULL || head->next == NULL) { return head; }
+    
+    int size = 0;
+    ListNode* curr = head;
+    while (curr != NULL) {
+        size++;
+        curr = curr->next;
+    }
+    
+    int inverse = size - k + 1;
+    int i = 1; // the list is 1-indexed
+    ListNode* ptr1, *ptr2;
+    
+    curr = head;
+    while (curr) {
+        if (i == k) { ptr1 = curr; }
+        if (i == inverse) { ptr2 = curr; }
+        curr = curr->next;
+        i++;
+    }
+    swap(ptr1->val, ptr2->val);
+    return head;
+}
+// Time complexity: O(N)
+// Space complexity: O(1)
+
 // 1290. Convert Binary Number in a Linked List to Integer (Easy)
 int getDecimalValue(ListNode* head) {
     if (head->next == NULL) { return head->val; }
@@ -28,6 +82,28 @@ int getDecimalValue(ListNode* head) {
 
 // Time complexity: O(n)
 // Space complexity: O(1)
+
+// 1019. Next Greater Node In Linked List (Medium)
+vector<int> nextLargerNodes(ListNode* head) {
+    vector<int> ans;
+    if (head == NULL) { return ans; }
+    while (head) {
+        ans.push_back(head->val);
+        head = head->next;   
+    }
+    stack<int> s;
+    for (int i = ans.size() - 1; i > -1; i--) {
+        int val = ans[i];
+        while (!s.empty() && s.top() <= val) {
+            s.pop();
+        }
+        ans[i] = s.empty() ? 0 : s.top();
+        s.push(val);
+    }
+    return ans;
+}
+// Time complexity: O(N)
+// Space complexity: O(N)
 
 // 237. Delete Node in a Linked List (Easy)
 void deleteNode(ListNode* node) {
@@ -100,6 +176,48 @@ ListNode* removeElements(ListNode* head, int val) {
 // Time complexity: O(n)
 // Space complexity: O(1)
 
+// 160. Intersection of Two Linked Lists (Easy)
+// Two-pointers solution
+ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+    ListNode* currA = headA;
+    ListNode* currB = headB;
+    int lenA = 0;
+    int lenB = 0;
+    while (currA) {
+        lenA++;
+        currA = currA->next;
+    }
+    while (currB) {
+        lenB++;
+        currB = currB->next;
+    }
+    int diff = abs(lenA - lenB);
+    ListNode* bigger = headA;
+    ListNode* smaller = headB;
+    if (lenA < lenB) { bigger = headB; smaller = headA; }
+    for (int i = 0; i < diff; i++) { bigger = bigger->next; }
+    while (bigger && smaller) {
+        if (bigger == smaller) { return bigger; }
+        bigger = bigger->next;
+        smaller = smaller->next;
+    }
+    return nullptr;
+}
+// More elegant two-pointers solution
+// Reference: https://leetcode.com/problems/intersection-of-two-linked-lists/discuss/49785/Java-solution-without-knowing-the-difference-in-len!
+ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+    ListNode* currA = headA;
+    ListNode* currB = headB;
+    while (currA != currB) {
+        currA = (currA != NULL) ? currA->next : headB;
+        currB = (currB != NULL) ? currB->next : headA;
+    }
+    return currA;
+}
+
+// Time complexity: O(m + n)
+// Space complexity: O(1)
+
 // 141. Linked List Cycle (Easy)
 bool hasCycle(ListNode *head) {
     if (head == nullptr || head->next == nullptr) { return false; }
@@ -114,6 +232,38 @@ bool hasCycle(ListNode *head) {
 }
 // Time complexity: O(n)
 // Space complexity: O(n)
+
+// 92. Reverse Linked List II (Medium)
+ListNode* reverseBetween(ListNode* head, int m, int n) {
+    if (head == NULL || head->next == NULL || m == n) return head;
+    ListNode* curr = head;
+    ListNode *before=NULL, *after=NULL, *prev=NULL;
+    ListNode *start, *end;
+    
+    int i = 1;
+    while (curr) {
+        // store the original next destination
+        ListNode* next = curr->next;
+        // update our pointers
+        if (i == m - 1) { before = curr; }
+        else if (i == n + 1) { after = curr; }
+        else if (i == m) { start = curr; }
+        else if (i == n) { end = curr; }
+        // reverse the sublist
+        if (i > m && i <= n) { curr->next = prev; }
+        // updated regardless of list reversal
+        prev = curr;
+        curr = next;
+        i++;
+    }
+    if (before != NULL) {
+        before->next = end;
+    } else {
+        head = end;
+    }
+    start->next = after;
+    return head;
+}
 
 // 83. Remove Duplicates from Sorted List (Easy)
 ListNode* deleteDuplicates(ListNode* head) {
@@ -136,7 +286,7 @@ ListNode* deleteDuplicates(ListNode* head) {
 // Space complexity: O(1)
 
 
-// 61. Linked List (Medium)
+// 61. Rotate List (Medium)
 ListNode* rotateRight(ListNode* head, int k) {
     if (head == NULL || k == 0) { return head; }
     
