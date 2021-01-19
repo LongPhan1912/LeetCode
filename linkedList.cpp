@@ -328,3 +328,28 @@ ListNode* rotateRight(ListNode* head, int k) {
 }
 // Time complexity: O(n)
 // Space complexity: O(1)
+
+// 21. Merge Two Sorted Lists (Easy)
+ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+    ListNode* res = new ListNode(0);
+    ListNode* curr = res;
+    while (l1 || l2) {
+        // if either pointers are null, we've reached the end
+        // time for one list to join the other
+        if (l1 == NULL) { curr->next = l2; break; }
+        if (l2 == NULL) { curr->next = l1; break; }
+        // if there's value in the first list that is less than or equal 
+        // to that in the second list, then tie curr's next to the node in the first list
+        if (l1->val <= l2->val) {
+            curr->next = l1;
+            l1 = l1->next;
+        } else {
+            curr->next = l2;
+            l2 = l2->next;
+        }
+        curr = curr->next;
+    }
+    return res->next;
+}
+// Time complexity: O(n)
+// Space complexity: O(1)
