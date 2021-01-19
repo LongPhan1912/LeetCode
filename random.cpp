@@ -59,3 +59,26 @@ vector<int> plusOne(vector<int>& digits) {
     }
     return digits;
 }
+// Time complexity: O(N)
+// Space complexity: O(1)
+
+// 8. String to Integer (atoi) (Medium)
+int myAtoi(string s) {
+    if (s.length() == 0 || isalpha(s[0])) return 0;
+    int i = 0;
+    while (i < s.length() && s[i] == ' ') {i++;}
+    int sign = 1;
+    if (s[i] == '-' || s[i] == '+') {
+        sign = (s[i++] == '+') ? : -1;
+    }
+    int res = 0;
+    int base = INT_MAX / 10;
+    while (isdigit(s[i])) {
+        if (res > base || (res == base && s[i] - '0' > 7)) 
+            return (sign != 0 && sign > 0) ? INT_MAX : INT_MIN;
+        res = 10 * res + (s[i++] - '0');
+    }
+    return sign * res;
+}
+// Time complexity: O(N)
+// Space complexity: O(1)
