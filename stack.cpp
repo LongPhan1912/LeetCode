@@ -1,3 +1,18 @@
+// 1673. Find the Most Competitive Subsequence (Medium)
+vector<int> mostCompetitive(vector<int>& nums, int k) {
+    vector<int> ans;
+    for (int i = 0, capacity = 0; i < nums.size(); i++) {
+        while (capacity < ans.size() && nums[i] < ans.back()) {
+            ans.pop_back();
+        }
+        if (ans.size() < k) { ans.push_back(nums[i]); }
+        if (i >= nums.size() - k) { capacity++; }
+    }
+    return ans;
+}
+// Time complexity: O(N)
+// Space complexity: O(k) for k items in vector
+
 // 1441. Build an Array With Stack Operations (Easy)
 vector<string> buildArray(vector<int>& target, int n) {
     vector<string> ans;
@@ -38,6 +53,45 @@ string removeDuplicates(string S) {
 }
 // Time complexity: O(N)
 // Space complexity: O(N)
+
+// 739. Daily Temperatures (Medium)
+vector<int> dailyTemperatures(vector<int>& T) {
+    stack<int> s;
+    vector<int> ans;
+    int count;
+    for (int i = T.size() - 1; i > -1; i--) {
+        while (!s.empty() && T[i] >= T[s.top()]) { s.pop(); }
+        count = (s.empty()) ? 0 : s.top() - i;
+        s.push(i);
+        ans.push_back(count);
+    }
+    reverse(ans.begin(), ans.end());
+    return ans;
+}
+// Time complexity: O(N)
+// Space complexity: O(N + W) where W is the size of the stack
+
+// 856. Score of Parentheses (Medium)
+int scoreOfParentheses(string S) {
+    stack<int> s;
+    s.push(0);
+    
+    for (int i = 0; i < S.length(); i++) {
+        char c = S[i];
+        if (c == '(') { s.push(0); }
+        else {
+            int oneBefore = s.top();
+            s.pop();
+            int twoBefore = s.top();
+            s.pop();
+            s.push(twoBefore + max(2*oneBefore, 1));
+        }
+    }
+    
+    return s.top();
+}
+// Time complexity: O(N)
+// Space complexity: O(W) where W is the size of the stack
 
 // 682. Baseball Game (Easy)
 int calPoints(vector<string>& ops) {
