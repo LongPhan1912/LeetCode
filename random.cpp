@@ -1,4 +1,23 @@
 // Just some random questions done in C++
+
+// 1725. Number Of Rectangles That Can Form The Largest Square (Easy)
+int countGoodRectangles(vector<vector<int>>& rectangles) {
+    int max = -1;
+    int ans = 0;
+    for (auto& row : rectangles) {
+        int side = min(row[0], row[1]);
+        if (max < side) {
+            ans = 1;
+            max = side;
+        } else if (max == side) {
+            ans++;
+        }
+    }
+    return ans;
+}
+// Time complexity: O(N)
+// Space complexity: O(1)
+
 // 1470. Shuffle the Array (Easy)
 // memory-efficient method
 vector<int> shuffle(vector<int>& nums, int n) {
@@ -61,6 +80,29 @@ vector<int> plusOne(vector<int>& digits) {
 }
 // Time complexity: O(N)
 // Space complexity: O(1)
+
+// 16. 3Sum Closest (Medium)
+int threeSumClosest(vector<int>& nums, int target) {
+    sort(nums.begin(), nums.end());
+    int sum = 0;
+    for (int i = 0; i < 3; i++) {
+        sum += nums[i];
+    }
+    for (int i = 0; i < nums.size()-2; i++) {
+        int lo = i+1;
+        int hi = nums.size() - 1;
+        while (lo < hi) {
+            int currSum = nums[i] + nums[lo] + nums[hi];
+            if (abs(currSum - target) < abs(sum - target)) {
+                sum = currSum;
+            }
+            if (currSum == target) return currSum;
+            else if (currSum < target) lo += 1;
+            else hi -= 1;
+        }
+    }
+    return sum;
+}
 
 // 8. String to Integer (atoi) (Medium)
 int myAtoi(string s) {
