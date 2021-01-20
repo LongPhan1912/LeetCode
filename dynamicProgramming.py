@@ -60,6 +60,20 @@ def isSubsequence(self, s: str, t: str) -> bool:
 # Time complexity: O(n)
 # Space complexity: O(1)
 
+# 121. Best Time to Buy and Sell Stock (Easy) -- technically not DP, but is categorised as such lol
+def maxProfit(self, prices: List[int]) -> int:
+    mini = float('inf')
+    profit = 0
+    for price in prices:
+        if mini > price: 
+            mini = price
+        elif profit < price - mini:
+            profit = price - mini
+    
+    return profit
+# Time complexity: O(n)
+# Space complexity: 0(1)
+
 # 70. Climbing Stairs (Easy)
 def climbStairs(self, n: int) -> int:
     dp = {}

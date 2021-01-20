@@ -181,6 +181,156 @@ def findDuplicates(self, nums: List[int]) -> List[int]:
 # Time complexity: O(n)
 # Space complexity: 0(1)
 
+# 350. Intersection of Two Arrays II (Easy)
+def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+    nums1.sort()
+    nums2.sort()
+    
+    ptr1, ptr2 = 0, 0
+    result = []
+    while (ptr1 < len(nums1) and ptr2 < len(nums2)):
+        curr1, curr2 = nums1[ptr1], nums2[ptr2]
+        if curr1 == curr2:
+            result.append(curr1)
+            ptr1 += 1
+            ptr2 += 1
+        elif curr1 < curr2:
+            ptr1 += 1
+        else:
+            ptr2 += 1
+    
+    return result
+
+# Time complexity: O(NlogN)
+# Space complexity: 0(1)
+
+# 283. Move Zeroes (Easy)
+# memory-efficient solution
+def moveZeroes(self, nums: List[int]) -> None:
+    """
+    Do not return anything, modify nums in-place instead.
+    """
+    z = 0
+    for idx, num in enumerate(nums):
+        if (num != 0):
+            nums[z], nums[idx] = nums[idx], nums[z]
+            z += 1
+        
+    return nums
+
+# Time complexity: O(N)
+# Space complexity: 0(1)
+
+# Queue data structure
+def moveZeroes(self, nums: List[int]) -> None:
+    """
+    Do not return anything, modify nums in-place instead.
+    """
+    queue = []
+    countZeroes = 0
+    for num in nums:
+        if (num != 0):
+            queue.append(num)
+        else:
+            countZeroes += 1
+    
+    queue += [0] * countZeroes
+    for i in range(len(nums)):
+        nums[i] = queue[i]
+        
+    return nums
+
+# Time complexity: O(N)
+# Space complexity: 0(N)
+
+# 268. Missing Number (Easy)
+def missingNumber(self, nums: List[int]) -> int:
+    if len(nums) == 0: 
+        return 0
+    
+    arr_total = sum(nums)
+    total_with_missing_num = 0
+    for i in range(len(nums)+1):
+        total_with_missing_num += i
+    
+    return total_with_missing_num - arr_total
+
+# Time complexity: O(N)
+# Space complexity: 0(1)
+
+# 242. Valid Anagram (Easy)
+from collections import Counter
+def isAnagram(self, s: str, t: str) -> bool:
+    return Counter(s) == Counter(t)
+
+# Time complexity: O(n)
+# Space complexity: 0(1)
+
+# 217. Contains Duplicate (Easy)
+def containsDuplicate(self, nums: List[int]) -> bool:
+    dp = dict()
+    for num in nums:
+        dp[num] = dp.get(num, 0) + 1
+        if dp[num] >= 2: return True
+    return False
+
+# Time complexity: O(n)
+# Space complexity: 0(n)
+
+# 198. House Robber (Medium)
+# Really great explanation: https://leetcode.com/problems/house-robber/discuss/156523/From-good-to-great.-How-to-approach-most-of-DP-problems.
+def rob(self, nums: List[int]) -> int:
+    if len(nums) == 0: return 0
+    elif len(nums) <= 2: return max(nums)
+    prefix = [0, nums[0]]
+    for i in range(1, len(nums)):
+        curr = nums[i]
+        prefix.append(max(prefix[i], prefix[i-1]+curr))
+        print(prefix)
+    
+    return prefix[-1]
+
+# Time complexity: O(n)
+# Space complexity: 0(n)
+
+# 136. Single Number (Easy)
+def singleNumber(self, nums: List[int]) -> int:
+    if (len(nums) == 1): 
+        return nums[0]
+    s = {}
+    for num in nums:
+        s[num] = s.get(num, 0) + 1
+    
+    for num in s:
+        if s[num] == 1: return num
+    return -1
+
+# Time complexity: O(n)
+# Space complexity: 0(n)
+
+# Bit Manipulation
+def singleNumber(self, nums):
+    a = 0
+    for i in nums:
+        a ^= i
+    return a
+# Time complexity: O(n)
+# Space complexity: 0(1)
+
+# 121. Best Time to Buy and Sell Stock (Easy)
+def maxProfit(self, prices: List[int]) -> int:
+    mini = float('inf')
+    profit = 0
+    for price in prices:
+        if mini > price: 
+            mini = price
+        elif profit < price - mini:
+            profit = price - mini
+    
+    return profit
+# Time complexity: O(n)
+# Space complexity: 0(1)
+
 # 53. Maximum Subarray (Easy)
 # sliding window technique
 def maxSubArray(self, nums: List[int]) -> int:
@@ -211,3 +361,20 @@ def maxSubArray(self, nums: List[int]) -> int:
         if curr_sum < 0: # reset curr_sum
             curr_sum = 0
     return max_sum
+
+# Time complexity: O(n)
+# Space complexity: 0(1)
+
+# 1. Two Sum (Easy)
+def twoSum(self, nums: List[int], target: int) -> List[int]:
+    complementary = dict()
+    for i, v in enumerate(nums):
+        complement = target - v 
+        if complement in complementary:
+            return [complementary[complement], i]
+        else:
+            complementary[v] = i
+    return [-1, -1]
+
+# Time complexity: O(n)
+# Space complexity: 0(n)

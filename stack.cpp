@@ -124,3 +124,22 @@ int calPoints(vector<string>& ops) {
 }
 // Time complexity: O(N)
 // Space complexity: O(N)
+
+// 20. Valid Parentheses (Easy)
+bool isValid(string s) {
+    stack<char> jack;
+    for (char c : s) {
+        if (jack.empty()) {
+            jack.push(c);
+        } else {
+            if ((jack.top() == '(' && c == ')') 
+                || (jack.top() == '{' && c == '}')
+                || (jack.top() == '[' && c == ']')) {
+                jack.pop();
+            } else {
+                jack.push(c);
+            }
+        }
+    }
+    return jack.empty();
+}
