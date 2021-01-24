@@ -34,3 +34,34 @@ def leastInterval(self, tasks: List[str], n: int) -> int:
 
 # Time complexity: O(NlogN) due to sorting
 # Space complexity: O(N) as we use the freq dict and the sorted_keys array
+
+# 5. Longest Palindromic Substring (Medium)
+def centerExpand(self, s, left, right):
+    while (left >= 0 and right < len(s) and s[left] == s[right]):
+        left -= 1
+        right += 1
+    return right - left - 1
+
+def longestPalindrome(self, s: str) -> str:
+    n = len(s)
+    if n <= 1:
+        return s
+    if n == 2:
+        return s if (s[0] == s[1]) else s[0]
+
+    start, end = 0, 0
+    for i in range(n):
+        # check for even palindrome
+        evenLen = self.centerExpand(s, i, i)
+        # check for odd palindrome
+        oddLen = self.centerExpand(s, i, i+1)
+        best = max(evenLen, oddLen)
+        if (best > end - start):
+            start = i - (best-1)//2
+            end = i + best//2
+
+    return s[start:end+1]
+
+# Time complexity: O(N^2)
+# Space complexity: O(1)
+
