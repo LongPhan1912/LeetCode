@@ -12,6 +12,13 @@ def findReplaceString(self, S: str, indexes: List[int], sources: List[str], targ
 # Time complexity: O(NQ) where N is the length of S, and we have Q replacement operations.
 # Space complexity: O(1)
 
+# 709. To Lower Case (Easy)
+def toLowerCase(self, str: str) -> str:
+    return str.lower()
+
+# Time complexity: O(N)
+# Space complexity: O(1)
+
 # 621. Task Scheduler (Medium)
 def leastInterval(self, tasks: List[str], n: int) -> int:
     freq = dict()
