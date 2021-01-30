@@ -1,3 +1,38 @@
+# 1239. Maximum Length of a Concatenated String with Unique Characters (Medium)
+# set solution
+def maxLength(self, arr: List[str]) -> int:
+        dp = [set()]
+        for substr in arr:
+            currSet = set(substr)
+            if len(currSet) == len(substr): 
+                for existingSet in dp[:]:
+                    if currSet & existingSet: continue 
+                    dp.append(currSet | existingSet)
+            
+        return max(len(s) for s in dp)
+
+# Time complexity: O(N^2)
+# Space complexity: O(N^2)
+
+# DFS solution
+maxLen = 0
+    def maxLength(self, arr: List[str]) -> int:
+        if len(arr) < 1:
+            return 0
+        if len(arr) == 1:
+            return len(arr[0])
+        self.maxLen = 0
+        self.dfs(arr, 0, "")
+        return self.maxLen
+        
+    def dfs(self, arr, idx, str):
+        self.maxLen = max(self.maxLen, len(str))
+        if idx == len(arr):
+            return
+        for j in range(idx, len(arr)):
+            if len(set(str + arr[j])) >= len(str + arr[j]):
+                self.dfs(arr, j+1, str + arr[j])
+
 # 833. Find And Replace in String (Medium)
 def findReplaceString(self, S: str, indexes: List[int], sources: List[str], targets: List[str]) -> str:
     # go from right to left instead of left to right
