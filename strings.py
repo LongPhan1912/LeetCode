@@ -1,3 +1,34 @@
+# 1525. Number of Good Ways to Split a String (Medium)
+def numSplits(self, s: str) -> int:
+    if len(s) == 1:
+        return 0
+    
+    ans = 0
+    l, r = {}, {}
+    uniqueLeft, uniqueRight = 0, 0
+    for char in s:
+        r[char] = r.get(char, 0) + 1
+        if r.get(char) == 1:
+            uniqueRight += 1
+        
+    for char in s:
+        l[char] = l.get(char, 0) + 1
+        r[char] -= 1
+        if l.get(char) == 1:
+            uniqueLeft += 1
+        if r.get(char) == 0:
+            uniqueRight -= 1
+        
+        if uniqueLeft > uniqueRight:
+            break
+        elif uniqueLeft == uniqueRight:
+            ans += 1
+        
+    return ans
+
+# Time complexity: O(N)
+# Space complexity: O(N)
+
 # 1455. Check If a Word Occurs As a Prefix of Any Word in a Sentence (Easy)
 def isPrefixOfWord(self, sentence: str, searchWord: str) -> int:
     words = sentence.split(" ")
