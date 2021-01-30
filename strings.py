@@ -1,3 +1,20 @@
+# 1455. Check If a Word Occurs As a Prefix of Any Word in a Sentence (Easy)
+def isPrefixOfWord(self, sentence: str, searchWord: str) -> int:
+    words = sentence.split(" ")
+    m = len(searchWord)
+    
+    for idx, word in enumerate(words):
+        if len(word) < m:
+            continue
+        else:
+            prefix = word[:m]
+            if prefix == searchWord:
+                return idx + 1
+    
+    return -1
+# Time complexity: O(N)
+# Space complexity: O(1)
+
 # 1247. Minimum Swaps to Make Strings Equal (Medium)
 def minimumSwap(self, s1: str, s2: str) -> int:
     if len(s1) != len(s2):
