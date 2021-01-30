@@ -317,6 +317,51 @@ def singleNumber(self, nums):
 # Time complexity: O(n)
 # Space complexity: 0(1)
 
+# 128. Longest Consecutive Subsequence (Hard)
+# Sorting solution
+def longestConsecutive(self, nums: List[int]) -> int:
+    currCount = 1
+    maxCount = 0
+    if len(nums) <= 1:
+        return len(nums)
+    
+    nums.sort()
+    prevNum = nums[0]
+    for i in range(1, len(nums)):
+        currNum = nums[i]
+        if currNum == prevNum:
+            continue
+        elif currNum - prevNum == 1:
+            currCount += 1
+            maxCount = max(maxCount, currCount)
+        else:
+            currCount = 1
+        prevNum = currNum
+    return maxCount
+
+# Time complexity: O(NlogN)
+# Space complexity: 0(1)
+
+# Hash set solution
+def longestConsecutive(self, nums: List[int]) -> int:
+    maxCount = 0
+    hashSet = set(nums)
+    
+    for num in hashSet:
+        currNum = num
+        currCount = 1
+        
+        while currNum + 1 in hashSet:
+            currCount += 1
+            currNum += 1
+        
+        maxCount = max(maxCount, currCount)
+    
+    return maxCount
+
+# Time complexity: O(N)
+# Space complexity: 0(N)
+
 # 121. Best Time to Buy and Sell Stock (Easy)
 def maxProfit(self, prices: List[int]) -> int:
     mini = float('inf')
