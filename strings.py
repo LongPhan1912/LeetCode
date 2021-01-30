@@ -1,3 +1,36 @@
+# 1247. Minimum Swaps to Make Strings Equal (Medium)
+def minimumSwap(self, s1: str, s2: str) -> int:
+    if len(s1) != len(s2):
+        return -1
+    if s1 == s2:
+        return 0
+    if len(s1) == 1 and len(s2) == 1 and s1 != s2:
+        return 0
+    
+    countX1, countX2 = 0, 0
+    countY1, countY2 = 0, 0
+    for i in range(len(s1)):
+        if s1[i] == s2[i]:
+            continue
+        if s1[i] == 'x':
+            countX1 += 1
+        if s2[i] == 'x':
+            countX2 += 1
+        if s1[i] == 'y':
+            countY1 += 1
+        if s2[i] == 'y':
+            countY2 += 1
+    
+    # there must be even numbers of X's and Y's, so if there's an imbalance, return -1
+    if (countX1 + countX2) % 2 != 0 or (countY1 + countY2) % 2 != 0:
+        return -1
+    # case1: countX1 // 2 is the number of "x" pairs and countY1 // 2 is the number of "y" pairs to swap
+    # case2: if we have a reversed pair, like "xy" and "yx", then we have to swap "x" twice. if we have "xxyy" and "yyxx", then we just need to know the number of pairs of X's and Y's to swap and (countX1 % 2) == 0.
+    return countX1 // 2 + countY1 // 2 + (countX1 % 2) * 2
+
+# Time complexity: O(N)
+# Space complexity: O(1)
+
 # 1239. Maximum Length of a Concatenated String with Unique Characters (Medium)
 # set solution
 def maxLength(self, arr: List[str]) -> int:
