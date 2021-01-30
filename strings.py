@@ -1,3 +1,20 @@
+# 1662. Check If Two String Arrays are Equivalent (Easy)
+def arrayStringsAreEqual(self, word1: List[str], word2: List[str]) -> bool:
+    str1, str2 = "", ""
+    if len(word1) == 0 and len(word2) == 0:
+        return True
+    if len(word1) == 0 or len(word2) == 0:
+        return False
+    
+    for substr in word1:
+        str1 += substr
+    for substr in word2:
+        str2 += substr
+    return str1 == str2
+
+# Time complexity: O(N)
+# Space complexity: O(1)
+
 # 1525. Number of Good Ways to Split a String (Medium)
 def numSplits(self, s: str) -> int:
     if len(s) == 1:
