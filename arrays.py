@@ -376,6 +376,24 @@ def maxProfit(self, prices: List[int]) -> int:
 # Time complexity: O(n)
 # Space complexity: 0(1)
 
+# 56. Merge Intervals (Medium)
+def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+    intervals.sort()
+    res = [intervals[0]]
+    
+    for idx in range(1, len(intervals)):
+        curr = intervals[idx]
+        back = res[-1]
+        if back[1] >= curr[0]:
+            res.pop()
+            res.append([back[0], max(curr[1], back[1])])
+        else:
+            res.append(curr)
+            
+    return res
+# Time complexity: O(NlogN)
+# Space complexity: 0(N)
+
 # 53. Maximum Subarray (Easy)
 # sliding window technique
 def maxSubArray(self, nums: List[int]) -> int:
