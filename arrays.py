@@ -428,6 +428,24 @@ def maxSubArray(self, nums: List[int]) -> int:
 # Time complexity: O(n)
 # Space complexity: 0(1)
 
+# 48. Rotate Image (Medium)
+# Rotate 4 cells approach
+def rotate(self, matrix: List[List[int]]) -> None:
+    """
+    Do not return anything, modify matrix in-place instead.
+    """
+    n = len(matrix)
+    for row in range(n//2):
+        for col in range(row, n-1-row):
+            matrix[row][col], matrix[col][n-1-row] = matrix[col][n-1-row], matrix[row][col]
+            matrix[row][col], matrix[n-1-row][n-1-col] = matrix[n-1-row][n-1-col], matrix[row][col]
+            matrix[row][col], matrix[n-1-col][row] = matrix[n-1-col][row], matrix[row][col]
+        
+    return matrix
+
+# Time complexity: O(M) where M is the number of cells in the matrix
+# Space complexity: 0(1)
+
 # 1. Two Sum (Easy)
 def twoSum(self, nums: List[int], target: int) -> List[int]:
     complementary = dict()
