@@ -274,3 +274,20 @@ def lengthOfLIS(self, nums: List[int]) -> int:
 
 # Time complexity: O(N^2)
 # Space complexity: O(N)
+
+# 162. Find Peak Element (Medium)
+def findPeakElement(self, nums: List[int]) -> int:
+    lo = 0
+    hi = len(nums)-1
+    
+    while (lo < hi):
+        mid = (lo + hi) // 2
+        if nums[mid] < nums[mid+1]:
+            lo = mid+1
+        else:
+            hi = mid
+    
+    return lo
+
+# Time complexity: O(logN)
+# Space complexity: O(1)
