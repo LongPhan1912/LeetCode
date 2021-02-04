@@ -18,6 +18,21 @@ int countGoodRectangles(vector<vector<int>>& rectangles) {
 // Time complexity: O(N)
 // Space complexity: O(1)
 
+// 1672. Richest Customer Wealth (Easy)
+int maximumWealth(vector<vector<int>>& accounts) {
+    int res = 0;
+    for (auto& it: accounts) {
+        int sum = 0;
+        for (int num : it) {
+            sum += num;
+        }
+        res = max(sum, res);
+    }
+    return res;
+}
+// Time complexity: O(N^2)
+// Space complexity: O(1)
+
 // 1470. Shuffle the Array (Easy)
 // memory-efficient method
 vector<int> shuffle(vector<int>& nums, int n) {
@@ -81,6 +96,74 @@ vector<int> plusOne(vector<int>& digits) {
 // Time complexity: O(N)
 // Space complexity: O(1)
 
+// 33. Search in Rotated Sorted Array (Medium)
+int search(vector<int>& nums, int target) {
+    int n = nums.size();
+    if (n == 1) {
+        if (nums[0] == target) { return 0; }
+        else { return -1; }
+    }
+    // Linear scan
+    // for (int i = 0; i < n; i++) {
+    //     if (nums[i] == target) {
+    //         return i;
+    //     }
+    // }
+    // return -1;
+    int lo = 0;
+    int hi = n-1;
+    
+    while (lo < hi) {
+        int mid = (lo + hi) / 2;
+        if (nums[mid] == target) {
+            return mid;
+        } else if (nums[mid] >= nums[lo]) {
+            if (nums[lo] <= target && nums[mid] > target) {
+                hi = mid - 1;
+            } else {
+                lo = mid + 1;
+            }
+        } else {
+            if (nums[hi] >= target && nums[mid] < target) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+    }
+    return nums[lo] == target ? lo : -1;
+}
+
+// Accounting for rotation:
+int search(vector<int>& nums, int target) {
+    int n = nums.size();
+    int lo = 0;
+    int hi = n-1;
+    while (lo < hi) {
+        int mid = (lo + hi) / 2;
+        if (nums[mid] > nums[hi]) { lo = mid + 1; }
+        else { hi = mid; }
+    }
+    int rotation = lo;
+    lo = 0;
+    hi = n-1;
+    
+    while (lo <= hi) {
+        int mid = (lo + hi) / 2;
+        int trueMid = (mid+rotation) % n;
+        if (nums[trueMid] == target) {
+            return trueMid;
+        } else if (nums[trueMid] > target) {
+            hi = mid-1;
+        } else {
+            lo = mid+1;
+        }
+    }
+    return -1;
+}
+// Time complexity: O(logN)
+// Space complexity: O(1)
+
 // 16. 3Sum Closest (Medium)
 int threeSumClosest(vector<int>& nums, int target) {
     sort(nums.begin(), nums.end());
@@ -124,4 +207,3 @@ int myAtoi(string s) {
 }
 // Time complexity: O(N)
 // Space complexity: O(1)
-
