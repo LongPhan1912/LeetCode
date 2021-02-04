@@ -446,6 +446,29 @@ def rotate(self, matrix: List[List[int]]) -> None:
 # Time complexity: O(M) where M is the number of cells in the matrix
 # Space complexity: 0(1)
 
+# Transpose then reflect method
+def rotate(self, matrix: List[List[int]]) -> None:
+    """
+    Do not return anything, modify matrix in-place instead.
+    """
+    self.transpose(matrix)
+    self.reflect(matrix)
+    return matrix
+
+def transpose(self, matrix):
+    for i in range(len(matrix)):
+        for j in range(i, len(matrix)):
+            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+            
+def reflect(self, matrix):
+    n = len(matrix)
+    for i in range(n):
+        for j in range(n//2):
+            matrix[i][j], matrix[i][n-1-j] = matrix[i][n-1-j], matrix[i][j]
+
+# Time complexity: O(M) where M is the number of cells in the matrix
+# Space complexity: 0(1)
+
 # 1. Two Sum (Easy)
 def twoSum(self, nums: List[int], target: int) -> List[int]:
     complementary = dict()
