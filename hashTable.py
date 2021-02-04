@@ -110,6 +110,27 @@ def subarraySum(self, nums: List[int], k: int) -> int:
 # Time complexity: O(N)
 # Space complexity: O(N)
 
+# 347. Top K Frequent Elements (Medium)
+import heapq
+def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+    freq = {}
+    if k == len(nums):
+        return nums
+    
+    for num in nums:
+        freq[num] = freq.get(num, 0) + 1
+    
+#         keys = sorted(freq, key=lambda k: freq[k], reverse=True)
+#         ans = []
+    
+#         for i in range(k):
+#             ans.append(keys[i])
+#         return ans
+    return heapq.nlargest(k, freq.keys(), key=freq.get)
+
+# Time complexity: O(NlogK)
+# Space complexity: O(N+K)
+
 # Explanation: Every time we encounter a new sum, we make a new entry in the hashmap corresponding to that sum.
 # If the same sum occurs again, we increment the count corresponding to that sum in the hashmap.
 # Further, for every sum encountered, we also determine the number of times the sum (sum - k) has occured already,
