@@ -440,8 +440,6 @@ def rotate(self, matrix: List[List[int]]) -> None:
             matrix[row][col], matrix[col][n-1-row] = matrix[col][n-1-row], matrix[row][col]
             matrix[row][col], matrix[n-1-row][n-1-col] = matrix[n-1-row][n-1-col], matrix[row][col]
             matrix[row][col], matrix[n-1-col][row] = matrix[n-1-col][row], matrix[row][col]
-        
-    return matrix
 
 # Time complexity: O(M) where M is the number of cells in the matrix
 # Space complexity: 0(1)
@@ -453,7 +451,6 @@ def rotate(self, matrix: List[List[int]]) -> None:
     """
     self.transpose(matrix)
     self.reflect(matrix)
-    return matrix
 
 def transpose(self, matrix):
     for i in range(len(matrix)):
