@@ -289,5 +289,6 @@ def findPeakElement(self, nums: List[int]) -> int:
     
     return lo
 
+
 # Time complexity: O(logN)
 # Space complexity: O(1)
