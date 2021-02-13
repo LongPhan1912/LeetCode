@@ -137,6 +137,36 @@ vector<int> nextLargerNodes(ListNode* head) {
 // Time complexity: O(N)
 // Space complexity: O(N)
 
+// 445. Add Two Numbers II (Medium)
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    stack<int> s1;
+    stack<int> s2;
+    while (l1) {
+        s1.push(l1->val);
+        l1 = l1->next;
+    }
+    while (l2) {
+        s2.push(l2->val);
+        l2 = l2->next;
+    }
+
+    ListNode* head = new ListNode(0);
+    ListNode* curr = NULL;
+    int sum = 0;
+    while (!s1.empty() || !s2.empty()) {
+        if (!s1.empty()) { sum += s1.top(); s1.pop(); }
+        if (!s2.empty()) { sum += s2.top(); s2.pop(); }
+        head->val = sum % 10;
+        curr = new ListNode(sum / 10);
+        curr->next = head;
+        head = curr;
+        sum /= 10;
+    }
+    return head->val == 0 ? head->next : head;
+}
+// Time complexity: O(N+M) where N and M are the sizes of the stacks s1 and s2, respectively
+// Space complexity: O(N+M)
+
 // 237. Delete Node in a Linked List (Easy)
 void deleteNode(ListNode* node) {
     if (node) {
