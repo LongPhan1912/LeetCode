@@ -144,3 +144,38 @@ def maxSubArray(self, nums: List[int]) -> int:
 
 # Time complexity: O(n)
 # Space complexity: O(1)
+
+# 38. Count and Say (Easy, but should be Medium)
+def countAndSay(self, n: int) -> str:
+    dp = [""]*(n)
+    dp[0] = "1"
+
+    count = 1
+    prev = None
+    val = ""
+
+    idx = 1
+    while (idx < n):
+        string = dp[idx-1]
+        for curr in string:
+            if prev is None:
+                prev = curr
+                continue
+            if prev != curr:
+                val += str(count) + prev
+                prev = curr
+                count = 1
+            elif prev == curr:
+                count += 1
+
+        val += str(count) + prev
+        dp[idx] = val
+        prev = None
+        count = 1
+        val = ""
+        idx += 1
+
+    return dp[n-1]
+
+# Time complexity: O(S*N) where S is the length of the string stored in the DP table at (idx-1) and N is the number given
+# Space complexity: O(M) where M is the size of the DP table
