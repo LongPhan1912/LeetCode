@@ -138,6 +138,33 @@ int minDepth(TreeNode* root) {
 // Time complexity: O(N)
 // Space complexity: O(h) with h being the height of the tree
 
+//102. Binary Tree Level Order Traversal (Medium)
+vector<vector<int>> levelOrder(TreeNode* root) {
+    queue<TreeNode*> q;
+    queue<TreeNode*> nodes;
+    vector<vector<int>> ans;
+    vector<int> sublist;
+    if (!root) return ans;
+
+    q.push(root);
+    while (!q.empty()) {
+        TreeNode* front = q.front();
+        q.pop();
+        sublist.push_back(front->val);
+        if (front->left) { nodes.push(front->left); }
+        if (front->right) { nodes.push(front->right); }
+
+        if (q.empty()) {
+            q.swap(nodes);
+            ans.push_back(sublist);
+            sublist = {};
+        }
+    }
+    return ans;
+}
+// Time complexity: O(M) for M nodes in the tree
+// Space complexity: O(N^2) as we are required a 2D array
+
 // 104. Maximum Depth of Binary Tree (Easy)
 int maxDepth(TreeNode* root) {
     if (root == NULL) return 0;
