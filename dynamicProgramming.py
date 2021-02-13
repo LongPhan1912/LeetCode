@@ -91,6 +91,23 @@ def coinChange(self, coins: List[int], amount: int) -> int:
 # Time complexity: O(S*N) where S is the size of the DP table and N is the total number of elems
 # Space complexity: O(S)
 
+# 221. Maximal Square (Medium)
+def maximalSquare(self, matrix: List[List[str]]) -> int:
+    r = len(matrix)
+    c = 0 if r <= 0 else len(matrix[0])
+
+    dp = [[0]*(c+1) for i in range(r+1)]
+    ans = 0
+    for i in range(1, r+1):
+        for j in range(1, c+1):
+            if matrix[i-1][j-1] == '1':
+                dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1
+                ans = max(ans, dp[i][j])
+
+    return ans**2
+# Time complexity: O(N^2)
+# Space complexity: 0(N^2)
+
 # 139. Word Break (Medium)
 def wordBreak(self, s: str, wordDict: List[str]) -> bool:
     n = len(s)
