@@ -52,6 +52,23 @@ TreeNode* invertTree(TreeNode* root) {
 // Time complexity: O(N)
 // Space complexity: O(N) worst case; O(logN) average case;
 
+// 124. Binary Tree Maximum Path Sum (Hard)
+int currMax;
+int maxPathSum(TreeNode* root) {
+    currMax = INT_MIN;
+    maxPathHelper(root);
+    return currMax;
+}
+int maxPathHelper(TreeNode* root) {
+    if (!root) return 0;
+    int left = max(maxPathHelper(root->left), 0);
+    int right = max(maxPathHelper(root->right), 0);
+    currMax = max(currMax, left + right + root->val);
+    return max(left, right) + root->val;
+}
+// Time complexity: O(N)
+// Space complexity: O(N) worst case; O(logN) average case;
+
 // 108. Convert Sorted Array to Binary Search Tree (Easy)
 TreeNode* sortedArrayToBST(vector<int>& nums) {
     if (nums.size() == 0) {
