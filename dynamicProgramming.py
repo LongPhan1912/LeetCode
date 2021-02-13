@@ -145,6 +145,22 @@ def maxSubArray(self, nums: List[int]) -> int:
 # Time complexity: O(n)
 # Space complexity: O(1)
 
+#  62. Unique Paths (Medium)
+def uniquePaths(self, m: int, n: int) -> int:
+    dp = [[0]*n for i in range(m)]
+    for row in range(m):
+        dp[row][0] = 1
+    for col in range(n):
+        dp[0][col] = 1
+
+    for row in range(1, m):
+        for col in range(1, n):
+            dp[row][col] = dp[row-1][col] + dp[row][col-1]
+
+    return dp[m-1][n-1]
+# Time complexity: O(N^2)
+# Space complexity: O(N^2)
+
 # 38. Count and Say (Easy, but should be Medium)
 def countAndSay(self, n: int) -> str:
     dp = [""]*(n)
