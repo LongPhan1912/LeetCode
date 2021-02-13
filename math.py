@@ -38,6 +38,20 @@ def maximum69Number (self, num: int) -> int:
 # Time complexity: O(n)
 # Space complexity: O(1)
 
+# 441. Arranging Coins (Easy)
+def arrangeCoins(self, n: int) -> int:
+    idx = 1
+    while True:
+        if n - idx >= 0:
+            n -= idx
+            idx += 1
+        else:
+            return idx-1
+
+    return -1
+# Time complexity: O(n)
+# Space complexity: O(1)
+
 # 29. Divide Two Integers (Medium)
 # I can't do bit manipulation lol
 def divide(self, dividend: int, divisor: int) -> int:
