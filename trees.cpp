@@ -125,6 +125,18 @@ void bfs(Node* root, queue<Node*> q, int level) {
 // Time complexity: O(M) for M nodes in the treee
 // Space complexity: O(N) for using a queue
 
+// 111. Minimum Depth of Binary Tree (Easy)
+int minDepth(TreeNode* root) {
+    if (!root) return 0;
+    if (root->left && !root->right) {
+        return 1 + minDepth(root->left);
+    } else if (!root->left && root->right) {
+        return 1 + minDepth(root->right);
+    }
+    return 1 + min(minDepth(root->left), minDepth(root->right));
+}
+// Time complexity: O(N)
+// Space complexity: O(h) with h being the height of the tree
 
 // 104. Maximum Depth of Binary Tree (Easy)
 int maxDepth(TreeNode* root) {
