@@ -89,6 +89,43 @@ TreeNode* helper(vector<int>& nums, int lo, int hi) {
 // Time complexity: O(N)
 // Space complexity: O(logN)
 
+// 116. Populating Next Right Pointers in Each Node (Medium)
+Node* connect(Node* root) {
+    if (!root || (!root->left && !root->right)) { return root; }
+    queue<Node*> q;
+    bfs(root, q, 0);
+    return root;
+}
+void bfs(Node* root, queue<Node*> q, int level) {
+    q.push(root);
+    Node* curr;
+    int size = 0;
+    while (!q.empty()) {
+        size = q.size();
+        curr = q.front();
+        q.pop();
+        if (curr->left && curr->right) {
+            q.push(curr->left);
+            q.push(curr->right);
+        }
+
+        size--;
+        for (int i = 0; i < size; i++) {
+            curr->next = q.front();
+            q.pop();
+            curr = curr->next;
+            if (curr->left && curr->right) {
+                q.push(curr->left);
+                q.push(curr->right);
+            }
+        }
+        curr->next = NULL;
+    }
+}
+// Time complexity: O(M) for M nodes in the treee
+// Space complexity: O(N) for using a queue
+
+
 // 104. Maximum Depth of Binary Tree (Easy)
 int maxDepth(TreeNode* root) {
     if (root == NULL) return 0;
