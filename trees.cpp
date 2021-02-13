@@ -38,6 +38,20 @@ TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
 // Time complexity: O(N)
 // Space complexity: O(N) worst case; O(logN) average case;
 
+// 226. Invert Binary Tree (Easy)
+TreeNode* invertTree(TreeNode* root) {
+    if (!root) { return root; }
+    TreeNode* left = root->left;
+    TreeNode* right = root->right;
+    root->left = right;
+    root->right = left;
+    invertTree(root->left);
+    invertTree(root->right);
+    return root;
+}
+// Time complexity: O(N)
+// Space complexity: O(N) worst case; O(logN) average case;
+
 // 108. Convert Sorted Array to Binary Search Tree (Easy)
 TreeNode* sortedArrayToBST(vector<int>& nums) {
     if (nums.size() == 0) {
