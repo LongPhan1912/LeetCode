@@ -91,6 +91,27 @@ def coinChange(self, coins: List[int], amount: int) -> int:
 # Time complexity: O(S*N) where S is the size of the DP table and N is the total number of elems
 # Space complexity: O(S)
 
+# 139. Word Break (Medium)
+def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+    n = len(s)
+    dp = [False]*(n+1)
+    dp[0] = True
+
+    # is there a word lying between j and i that matches a word in the wordDict?
+    # dp[j] means that you can start from point j onwards so to make a word
+    # when you get a valid word from j to i, 
+    # then dp[i], which later becomes dp[j], can give you a new starting point
+    # and the process continues
+    for i in range(1, n+1):
+        for j in range(0, i):
+            if dp[j] and s[j:i] in wordDict:
+                dp[i] = True
+                break
+
+    return dp[n]
+# Time complexity: O(N^2)
+# Space complexity: 0(N)
+
 # 121. Best Time to Buy and Sell Stock (Easy) -- technically not DP, but is categorised as such lol
 def maxProfit(self, prices: List[int]) -> int:
     mini = float('inf')
@@ -127,6 +148,22 @@ def climbStairs(self, n: int) -> int:
 # Time complexity: O(logN)
 # Space complexity: O(1)
 
+#  62. Unique Paths (Medium)
+def uniquePaths(self, m: int, n: int) -> int:
+    dp = [[0]*n for i in range(m)]
+    for row in range(m):
+        dp[row][0] = 1
+    for col in range(n):
+        dp[0][col] = 1
+
+    for row in range(1, m):
+        for col in range(1, n):
+            dp[row][col] = dp[row-1][col] + dp[row][col-1]
+
+    return dp[m-1][n-1]
+# Time complexity: O(N^2)
+# Space complexity: O(N^2)
+
 # 53. Maximum Subarray (Easy)
 def maxSubArray(self, nums: List[int]) -> int:
     n = len(nums)
@@ -144,22 +181,6 @@ def maxSubArray(self, nums: List[int]) -> int:
 
 # Time complexity: O(n)
 # Space complexity: O(1)
-
-#  62. Unique Paths (Medium)
-def uniquePaths(self, m: int, n: int) -> int:
-    dp = [[0]*n for i in range(m)]
-    for row in range(m):
-        dp[row][0] = 1
-    for col in range(n):
-        dp[0][col] = 1
-
-    for row in range(1, m):
-        for col in range(1, n):
-            dp[row][col] = dp[row-1][col] + dp[row][col-1]
-
-    return dp[m-1][n-1]
-# Time complexity: O(N^2)
-# Space complexity: O(N^2)
 
 # 38. Count and Say (Easy, but should be Medium)
 def countAndSay(self, n: int) -> str:
