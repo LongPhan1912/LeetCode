@@ -78,6 +78,19 @@ def isSubsequence(self, s: str, t: str) -> bool:
 # Time complexity: O(n)
 # Space complexity: O(1)
 
+# 322. Coin Change (Medium)
+def coinChange(self, coins: List[int], amount: int) -> int:
+    dp = [float('inf')]*(amount+1)
+    dp[0] = 0
+    for num in range(1, amount+1):
+        for denom in coins:
+            if denom <= num:
+                dp[num] = min(dp[num], dp[num-denom]+1)
+
+    return dp[amount] if dp[amount] <= amount else -1
+# Time complexity: O(S*N) where S is the size of the DP table and N is the total number of elems
+# Space complexity: O(S)
+
 # 121. Best Time to Buy and Sell Stock (Easy) -- technically not DP, but is categorised as such lol
 def maxProfit(self, prices: List[int]) -> int:
     mini = float('inf')
