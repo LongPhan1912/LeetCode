@@ -23,7 +23,20 @@ public:
     }
 };
 // Time complexity: O(N)
-// Space complexity: O(1)
+// Space complexity: O(N)
+
+// 617. Merge Two Binary Trees (Easy)
+TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
+    if (!root1 && !root2) { return root1; }
+    else if (root1 && !root2) { return root1; }
+    else if (!root1 && root2) { return root2; }
+    root1->val += root2->val;
+    root1->left = mergeTrees(root1->left, root2->left);
+    root1->right = mergeTrees(root1->right, root2->right);
+    return root1;
+}
+// Time complexity: O(N)
+// Space complexity: O(N) worst case; O(logN) average case;
 
 // 108. Convert Sorted Array to Binary Search Tree (Easy)
 TreeNode* sortedArrayToBST(vector<int>& nums) {
