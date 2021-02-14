@@ -73,6 +73,32 @@ vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
 // Time complexity: O(N)
 // Space complexity: O(N)
 
+// 118. Pascal's Triangle (Easy)
+vector<vector<int>> generate(int numRows) {
+    vector<vector<int>> ans;
+    if (numRows == 0) {
+        return ans;
+    }
+
+    vector<int> curr;
+    curr.push_back(1);
+    ans.push_back(curr);
+    curr.clear();
+
+    for (int i = 1; i < numRows; i++) {
+        curr.push_back(1);
+        for (int j = 1; j < i; j++) {
+            curr.push_back(ans[i-1][j-1] + ans[i-1][j]);
+        }
+        curr.push_back(1);
+        ans.push_back(curr);
+        curr.clear();
+    }
+    return ans;
+}
+// Time complexity: O(N^2)
+// Space complexity: O(N^2)
+
 // 66. Plus One (Easy)
 vector<int> plusOne(vector<int>& digits) {
     int last = digits.size() - 1;
