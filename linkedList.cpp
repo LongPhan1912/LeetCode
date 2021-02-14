@@ -367,6 +367,27 @@ ListNode* deleteDuplicates(ListNode* head) {
 // Time complexity: O(n)
 // Space complexity: O(1)
 
+// 82. Remove Duplicates from Sorted List II (Medium)
+ListNode* deleteDuplicates(ListNode* head) {
+    ListNode* res = new ListNode(0, head);
+    ListNode* prev = res;
+
+    while (head) {
+        if (head->next && head->val == head->next->val) {
+            while (head->next && head->val == head->next->val) {
+                head = head->next;
+            }
+            prev->next = head->next;
+        } else {
+            prev = prev->next;
+        }
+        head = head->next;
+    }
+    return res->next;
+}
+// Time complexity: O(n)
+// Space complexity: O(1)
+
 // 61. Rotate List (Medium)
 ListNode* rotateRight(ListNode* head, int k) {
     if (head == NULL || k == 0) { return head; }
