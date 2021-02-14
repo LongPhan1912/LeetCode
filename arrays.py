@@ -172,6 +172,32 @@ def minSetSize(self, arr: List[int]) -> int:
 # Time complexity: O(n) // build heap / heapify and loops are O(n)
 # Space complexity: 0(n)
 
+# 771. Jewels and Stones (Easy)
+def numJewelsInStones(self, jewels: str, stones: str) -> int:
+    stoneTable = {}
+    for stone in stones:
+        stoneTable[stone] = stoneTable.get(stone, 0) + 1
+
+    ans = 0
+    for jewel in jewels:
+        if stoneTable.get(jewel):
+            ans += stoneTable[jewel]
+
+    return ans
+
+# Sol 2:
+# 	stoneSet = set(jewels)
+#         ans = 0
+#         for stone in stones:
+#             if stone in stoneSet:
+#                 ans += 1
+                
+#     return ans
+
+# Time complexity: O(n)
+# Space complexity: 0(n)
+
+
 # 442. Find All Duplicates in an Array (Medium)
 # fast solution
 def findDuplicates(self, nums: List[int]) -> List[int]:
