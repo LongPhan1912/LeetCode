@@ -165,7 +165,27 @@ def climbStairs(self, n: int) -> int:
 # Time complexity: O(logN)
 # Space complexity: O(1)
 
-#  62. Unique Paths (Medium)
+# 64. Minimum Path Sum (Medium)
+def minPathSum(self, grid: List[List[int]]) -> int:
+    n = len(grid)
+    m = len(grid[0])
+
+    for col in range(1, m):
+        grid[0][col] += grid[0][col-1]
+
+    for row in range(1, n):
+        grid[row][0] += grid[row-1][0]
+
+
+    for row in range(1, n):
+        for col in range(1, m):
+            grid[row][col] += min(grid[row-1][col], grid[row][col-1])
+
+    return grid[n-1][m-1]
+# Time complexity: O(N^2)
+# Space complexity: O(1) as we are remodifying the given array
+
+# 62. Unique Paths (Medium)
 def uniquePaths(self, m: int, n: int) -> int:
     dp = [[0]*n for i in range(m)]
     for row in range(m):
