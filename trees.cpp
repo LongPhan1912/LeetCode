@@ -69,26 +69,6 @@ int maxPathHelper(TreeNode* root) {
 // Time complexity: O(N)
 // Space complexity: O(N) worst case; O(logN) average case;
 
-// 108. Convert Sorted Array to Binary Search Tree (Easy)
-TreeNode* sortedArrayToBST(vector<int>& nums) {
-    if (nums.size() == 0) {
-        return NULL;
-    }
-    return helper(nums, 0, nums.size()-1);
-}
-TreeNode* helper(vector<int>& nums, int lo, int hi) {
-    if (lo <= hi) {
-        int mid = (lo + hi) / 2;
-        TreeNode* curr = new TreeNode(nums[mid]);
-        curr->right = helper(nums, mid+1, hi);
-        curr->left = helper(nums, lo, mid-1);
-        return curr;
-    }
-    return NULL;
-}
-// Time complexity: O(N)
-// Space complexity: O(logN)
-
 // 116. Populating Next Right Pointers in Each Node (Medium)
 Node* connect(Node* root) {
     if (!root || (!root->left && !root->right)) { return root; }
@@ -138,6 +118,34 @@ int minDepth(TreeNode* root) {
 // Time complexity: O(N)
 // Space complexity: O(h) with h being the height of the tree
 
+// 108. Convert Sorted Array to Binary Search Tree (Easy)
+TreeNode* sortedArrayToBST(vector<int>& nums) {
+    if (nums.size() == 0) {
+        return NULL;
+    }
+    return helper(nums, 0, nums.size()-1);
+}
+TreeNode* helper(vector<int>& nums, int lo, int hi) {
+    if (lo <= hi) {
+        int mid = (lo + hi) / 2;
+        TreeNode* curr = new TreeNode(nums[mid]);
+        curr->right = helper(nums, mid+1, hi);
+        curr->left = helper(nums, lo, mid-1);
+        return curr;
+    }
+    return NULL;
+}
+// Time complexity: O(N)
+// Space complexity: O(logN)
+
+// 104. Maximum Depth of Binary Tree (Easy)
+int maxDepth(TreeNode* root) {
+    if (root == NULL) return 0;
+    return 1 + max(maxDepth(root->left), maxDepth(root->right));
+}
+// Time complexity: O(N)
+// Space complexity: O(logN)
+
 //102. Binary Tree Level Order Traversal (Medium)
 vector<vector<int>> levelOrder(TreeNode* root) {
     queue<TreeNode*> q;
@@ -164,14 +172,6 @@ vector<vector<int>> levelOrder(TreeNode* root) {
 }
 // Time complexity: O(M) for M nodes in the tree
 // Space complexity: O(N^2) as we are required a 2D array
-
-// 104. Maximum Depth of Binary Tree (Easy)
-int maxDepth(TreeNode* root) {
-    if (root == NULL) return 0;
-    return 1 + max(maxDepth(root->left), maxDepth(root->right));
-}
-// Time complexity: O(N)
-// Space complexity: O(logN)
 
 // 100. Same Tree (Easy)
 bool isSameTree(TreeNode* p, TreeNode* q) {
