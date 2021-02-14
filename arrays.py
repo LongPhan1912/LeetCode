@@ -17,6 +17,21 @@ def check(self, nums: List[int]) -> bool:
 # Time complexity: O(NlogN)
 # Space complexity: 0(N)
 
+# 1701. Average Waiting Time (Medium)
+def averageWaitingTime(self, customers: List[List[int]]) -> float:
+    sum = 0
+    time = 0
+
+    for c in customers:
+        time = max(c[0], time) + c[1]
+        sum += time - c[0]
+
+    return sum / len(customers)
+
+# Time complexity: O(N)
+# Space complexity: 0(1)
+
+
 # 1608. Special Array With X Elements Greater Than or Equal X (Easy)
 def specialArray(self, nums: List[int]) -> int:
     # sort the array in order
