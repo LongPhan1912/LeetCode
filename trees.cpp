@@ -173,6 +173,16 @@ int maxDepth(TreeNode* root) {
 // Time complexity: O(N)
 // Space complexity: O(logN)
 
+// 100. Same Tree (Easy)
+bool isSameTree(TreeNode* p, TreeNode* q) {
+    if (!p && !q) { return true; }
+    if (!p || !q) { return false; }
+    if (p->val != q->val) { return false; }
+    return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+}
+// Time complexity: O(N)
+// Space complexity: O(logN)
+
 // 94. Binary Tree Inorder Traversal (Medium)
 vector<int> inorderTraversal(TreeNode* root) {
     vector<int> res;
