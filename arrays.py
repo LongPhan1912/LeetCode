@@ -1,3 +1,22 @@
+# 1752. Check if Array Is Sorted and Rotated (Easy)
+def check(self, nums: List[int]) -> bool:
+    sortedArr = sorted(nums)
+    n = len(nums)
+    rotate = 0
+    for idx in range(1, n):
+        if nums[idx] < nums[idx-1]:
+            rotate = idx
+            break
+
+    rotatedArr = [-1]*n
+    for idx in range(n):
+        rotatedArr[idx] = nums[(idx+rotate)%n]
+
+    return rotatedArr == sortedArr
+
+# Time complexity: O(NlogN)
+# Space complexity: 0(N)
+
 # 1608. Special Array With X Elements Greater Than or Equal X (Easy)
 def specialArray(self, nums: List[int]) -> int:
     # sort the array in order
