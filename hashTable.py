@@ -137,6 +137,47 @@ def topKFrequent(self, nums: List[int], k: int) -> List[int]:
 # since it will determine the number of times a subarray with sum k has occured upto the current index. We increment the
 # count by the same amount.
 
+# 12. Integer to Roman (Medium)
+def intToRoman(self, num: int) -> str:
+    symbols = {
+        1 : "I",
+        4 : "IV",
+        5 : "V",
+        9 : "IX",
+        10: "X",
+        40: "XL",
+        50: "L",
+        90: "XC",
+        100: "C",
+        400: "CD",
+        500: "D",
+        900: "CM",
+        1000: "M"
+    }
+    special_cases = [4, 5, 9]
+    ans = ""
+
+    i = 3
+    while (num >= 1):
+        curr_factor_of_10 = (10**i)
+        digit = num // curr_factor_of_10
+        if digit in special_cases:
+            ans += symbols[digit*curr_factor_of_10]
+        else:
+            if digit >= 6 and digit <= 8:
+                ans += symbols[5*curr_factor_of_10] + symbols[curr_factor_of_10]*(digit-5)
+            else:
+                ans += symbols[curr_factor_of_10]*digit
+
+        num %= curr_factor_of_10
+        i -= 1
+
+    return ans
+
+# Time complexity: O(N)
+# Space complexity: O(N)
+
+
 # 3. Longest Substring Without Repeating Characters (Medium)
 def lengthOfLongestSubstring(self, s: str) -> int:
     if len(s) <= 1:
