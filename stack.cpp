@@ -125,6 +125,26 @@ int calPoints(vector<string>& ops) {
 // Time complexity: O(N)
 // Space complexity: O(N)
 
+// 456. 132 Pattern (Medium)
+bool find132pattern(vector<int>& nums) {
+    int n = nums.size();
+    if (n <= 2) { return false; }
+    stack<int> s;
+    int kVal = INT_MIN;
+
+    for (int i = n-1; i > -1; i--) {
+        if (nums[i] < kVal) { return true; }
+        while (!s.empty() && nums[i] > s.top()) {
+            kVal = s.top();
+            s.pop();
+        }
+        s.push(nums[i]);
+    }
+    return false;
+}
+// Time complexity: O(N) where N is the size of the nums vector
+// Space complexity: O(S) where S is the size of the stack
+
 // 20. Valid Parentheses (Easy)
 bool isValid(string s) {
     stack<char> jack;
