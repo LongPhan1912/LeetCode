@@ -137,6 +137,26 @@ vector<int> nextLargerNodes(ListNode* head) {
 // Time complexity: O(N)
 // Space complexity: O(N)
 
+// 876. Middle of the Linked List (Easy)
+ListNode* middleNode(ListNode* head) {
+    int size = 0;
+    ListNode* curr = head;
+    while (curr) {
+        size += 1;
+        curr = curr->next;
+    }
+    int mid = floor(size / 2);
+    curr = head;
+    int i = 0;
+    while (i != mid) {
+        curr = curr->next;
+        i += 1;
+    } 
+    return curr;
+}
+// Time complexity: O(N)
+// Space complexity: O(1)
+
 // 445. Add Two Numbers II (Medium)
 ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
     stack<int> s1;
@@ -346,7 +366,6 @@ ListNode* deleteDuplicates(ListNode* head) {
 }
 // Time complexity: O(n)
 // Space complexity: O(1)
-
 
 // 61. Rotate List (Medium)
 ListNode* rotateRight(ListNode* head, int k) {
