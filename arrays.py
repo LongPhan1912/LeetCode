@@ -60,6 +60,17 @@ def restoreArray(self, adjacentPairs: List[List[int]]) -> List[int]:
 # Time complexity: O(N)
 # Space complexity: 0(N)
 
+# 1732. Find the Highest Altitude (Easy)
+def largestAltitude(self, gain: List[int]) -> int:
+        res = max(0, gain[0])
+        for idx in range(1, len(gain)):
+            gain[idx] += gain[idx-1]
+            res = max(res, gain[idx])
+            
+        return res
+    
+# Time complexity: O(N)
+# Space complexity: 0(1)
 
 # 1701. Average Waiting Time (Medium)
 def averageWaitingTime(self, customers: List[List[int]]) -> float:
