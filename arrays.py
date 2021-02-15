@@ -34,6 +34,33 @@ def sumOfUnique(self, nums: List[int]) -> int:
 # Space complexity: 0(N)
 
 
+# 1743. Restore the Array From Adjacent Pairs (Medium)
+def restoreArray(self, adjacentPairs: List[List[int]]) -> List[int]:
+    map = {}
+    for pair in adjacentPairs:
+        map.setdefault(pair[0], []).append(pair[1])
+        map.setdefault(pair[1], []).append(pair[0])
+
+    res = []
+    for node in map:
+        if len(map[node]) == 1:
+            res.append(node)
+            res.append(map[node][0])
+            break
+
+    for ops in range(len(adjacentPairs)-1):
+        tail = res[-1]
+        next = map[tail]
+        prev = res[-2]
+        next.remove(prev)
+        res.append(next[0])
+
+    return res
+
+# Time complexity: O(N)
+# Space complexity: 0(N)
+
+
 # 1701. Average Waiting Time (Medium)
 def averageWaitingTime(self, customers: List[List[int]]) -> float:
     sum = 0
