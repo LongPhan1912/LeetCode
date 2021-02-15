@@ -33,6 +33,23 @@ int maximumWealth(vector<vector<int>>& accounts) {
 // Time complexity: O(N^2)
 // Space complexity: O(1)
 
+// 1624. Largest Substring Between Two Equal Characters (Easy)
+int maxLengthBetweenEqualCharacters(string s) {
+    map<char, int> m;
+    int res = -1;
+    for (int i = 0; i < s.length(); i++) {
+        char c = s[i];
+        if (m.count(c)) {
+            res = max(res, i-m[c]-1);
+        } else {
+            m[c] = i;   
+        }
+    }
+    return res;
+}
+// Time complexity: O(N)
+// Space complexity: O(N)
+
 // 1470. Shuffle the Array (Easy)
 // memory-efficient method
 vector<int> shuffle(vector<int>& nums, int n) {
