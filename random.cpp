@@ -124,6 +124,46 @@ vector<int> replaceElements(vector<int>& arr) {
 // Time complexity: O(N)
 // Space complexity: O(1)
 
+// 443. String Compression (Medium)
+int compress(vector<char>& chars) {
+    vector<char> ans;
+    char temp = ' ';
+    int count = 1;
+    for (int i = 0; i < chars.size(); i++) {
+        char c = chars[i];
+        if (temp == ' ') {
+            temp = c;
+        } else {
+            if (temp == c) {
+                count += 1;
+            } else {
+                ans.push_back(temp);
+                if (count > 1 && count <= 9) ans.push_back('0'+count);
+                else if (count >= 10) {
+                    string num = to_string(count);
+                    for (char n : num) {
+                        ans.push_back(n);
+                    }
+                }
+                count = 1;
+                temp = c;
+            }
+        }
+    }
+    ans.push_back(temp);
+    if (count > 1 && count <= 9) ans.push_back('0'+count);
+    else if (count >= 10) {
+        string num = to_string(count);
+        for (char n : num) {
+            ans.push_back(n);
+        }
+    }
+    chars = ans;
+    return ans.size();
+}
+// Time complexity: O(NxM) where N is the size of the array and M is the length of the string of a count greater or equal to 10
+// Space complexity: O(N)
+
 // 118. Pascal's Triangle (Easy)
 vector<vector<int>> generate(int numRows) {
     vector<vector<int>> ans;
