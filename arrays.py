@@ -17,6 +17,23 @@ def check(self, nums: List[int]) -> bool:
 # Time complexity: O(NlogN)
 # Space complexity: 0(N)
 
+# 1748. Sum of Unique Elements (Easy)
+def sumOfUnique(self, nums: List[int]) -> int:
+    map = {}
+    for num in nums:
+        map[num] = map.get(num, 0) + 1
+
+    res = 0
+    for k in map:
+        if map[k] == 1:
+            res += k
+
+    return res
+
+# Time complexity: O(N)
+# Space complexity: 0(N)
+
+
 # 1701. Average Waiting Time (Medium)
 def averageWaitingTime(self, customers: List[List[int]]) -> float:
     sum = 0
