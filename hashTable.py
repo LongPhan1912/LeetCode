@@ -138,6 +138,39 @@ def subarraySum(self, nums: List[int], k: int) -> int:
 # Time complexity: O(N)
 # Space complexity: O(N)
 
+# 389. Find the Difference (Easy)
+def findTheDifference(self, s: str, t: str) -> str:
+        for char in t:
+            if t.count(char) - s.count(char) == 1:
+                return char
+            
+# Time complexity: O(N^2)
+# Space complexity: O(1)
+
+#         if len(s) == 0:
+#             return t
+#         if len(t) == 0:
+#             return s
+        
+#         charCount = {}
+#         for char in s:
+#             charCount[char] = charCount.get(char, 0) + 1
+        
+#         charCount2 = {}
+#         for char in t:
+#             if not charCount.get(char):
+#                 return char
+#             else:
+#                 charCount2[char] = charCount2.get(char, 0) + 1
+        
+#         for char in t:
+#             if charCount[char] < charCount2[char]:
+#                 return char
+        
+#         return ""
+# Time complexity: O(N)
+# Space complexity: O(N)
+
 # 347. Top K Frequent Elements (Medium)
 import heapq
 def topKFrequent(self, nums: List[int], k: int) -> List[int]:
