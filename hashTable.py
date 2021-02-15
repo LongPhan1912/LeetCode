@@ -1,3 +1,23 @@
+# 1636. Sort Array by Increasing Frequency (Easy)
+def frequencySort(self, nums: List[int]) -> List[int]:
+    freq = {}
+    for num in nums:
+        freq[num] = freq.get(num, 0) + 1
+
+    freqAndKey = {}
+    for num, val in sorted(freq.items(), key=lambda k:k[1]):
+        freqAndKey.setdefault(val, []).append(num)
+
+    ans = []
+    for f, numbers in freqAndKey.items():
+        numbers.sort(reverse=True)
+        for n in numbers:
+            ans += [n]*f
+
+    return ans
+# Time complexity: O(N^2logN)
+# Space complexity: O(N)
+
 # 1512. Number of Good Pairs (Easy)
 def numIdenticalPairs(self, nums: List[int]) -> int:
     pairs = {}
@@ -12,6 +32,7 @@ def numIdenticalPairs(self, nums: List[int]) -> int:
 
 # Time complexity: O(N)
 # Space complexity: O(N)
+
 
 # 1365. How Many Numbers Are Smaller Than the Current Number (Easy)
 def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
@@ -29,8 +50,8 @@ def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
 # Time complexity: O(NlogN)
 # Space complexity: O(N)
 
-# 1160. Find Words That Can Be Formed by Characters (Easy)
 
+# 1160. Find Words That Can Be Formed by Characters (Easy)
 # Extremely slow solution
 def countCharacters(self, words: List[str], chars: str) -> int:
     sortedCharArr = sorted(chars)
