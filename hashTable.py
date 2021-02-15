@@ -18,6 +18,13 @@ def frequencySort(self, nums: List[int]) -> List[int]:
 # Time complexity: O(N^2logN)
 # Space complexity: O(N)
 
+# Elegant solution using Counter:
+def frequencySort2(self, nums: List[int]) -> List[int]:
+    freq = Counter(nums)
+    return sorted(nums, key=lambda x : (freq[x], -x))
+# Time complexity: O(NlogN)
+# Space complexity: O(N)
+
 # 1512. Number of Good Pairs (Easy)
 def numIdenticalPairs(self, nums: List[int]) -> int:
     pairs = {}
