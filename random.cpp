@@ -89,6 +89,24 @@ int numberOfSteps (int num) {
 // Time complexity: O(N)
 // Space complexity: O(1)
 
+// 1299. Replace Elements with Greatest Element on Right Side (Easy)
+vector<int> replaceElements(vector<int>& arr) {
+    int m = INT_MIN;
+    for (int i = arr.size()-1; i > -1; i--) {
+        if (m == INT_MIN) { m = arr[i]; }
+        if (i == arr.size()-1) {
+            arr[i] = -1;
+        } else {
+            int temp = max(m, arr[i]);
+            arr[i] = m;
+            m = temp;
+        }
+    }
+    return arr;
+}
+// Time complexity: O(N)
+// Space complexity: O(1)
+
 // 118. Pascal's Triangle (Easy)
 vector<vector<int>> generate(int numRows) {
     vector<vector<int>> ans;
