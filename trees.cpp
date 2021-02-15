@@ -38,6 +38,30 @@ TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
 // Time complexity: O(N)
 // Space complexity: O(N) worst case; O(logN) average case;
 
+// 515. Find Largest Value in Each Tree Row (Medium)
+vector<int> largestValues(TreeNode* root) {
+    vector<int> res;
+    if (!root) { return res; }
+    queue<TreeNode*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        int m = INT_MIN;
+        int size = q.size();
+        for (int i = 0; i < size; i++) {
+            TreeNode* curr = q.front();
+            q.pop();
+            m = max(m, curr->val);
+            if (curr->left) { q.push(curr->left); }
+            if (curr->right) { q.push(curr->right); } 
+        }
+        res.push_back(m);
+    }
+    return res;
+}
+// Time complexity: O(N)
+// Space complexity: O(N)
+
 // 226. Invert Binary Tree (Easy)
 TreeNode* invertTree(TreeNode* root) {
     if (!root) { return root; }
