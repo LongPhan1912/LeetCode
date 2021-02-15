@@ -207,6 +207,29 @@ def leastInterval(self, tasks: List[str], n: int) -> int:
 # Time complexity: O(NlogN) due to sorting
 # Space complexity: O(N) as we use the freq dict and the sorted_keys array
 
+# 345. Reverse Vowels of a String (Easy)
+def reverseVowels(self, s: str) -> str:
+    chars = list(s)
+    vowelSet = {'a', 'e', 'i', 'o', 'u'}
+
+    lo = 0
+    hi = len(chars)-1
+
+    while (lo < hi):
+        while (lo < hi and chars[lo].lower() not in vowelSet):
+            lo+=1
+        while (hi > lo and chars[hi].lower() not in vowelSet):
+            hi-=1
+
+        chars[lo], chars[hi] = chars[hi], chars[lo]
+        lo+=1
+        hi-=1
+
+    return ''.join(chars)
+
+# Time complexity: O(logN)
+# Space complexity: O(N)
+
 # 125. Valid Palindrome (Easy)
 def isPalindrome(self, s: str) -> bool:
     if len(s) <= 1:
