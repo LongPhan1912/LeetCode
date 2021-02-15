@@ -1,3 +1,35 @@
+# 1694. Reformat Phone Number (Easy)
+def reformatNumber(self, number: str) -> str:
+    all_digits = ''.join([char for char in number if char.isnumeric()])
+
+    n = len(all_digits)
+    if n <= 3:
+        return all_digits
+
+    mod = n % 3
+    quotient = n // 3
+
+    if mod == 1:
+        quotient -= 1
+        mod += 3
+
+    ans = ""
+    while (quotient > 0):
+        ans += all_digits[:3] + "-"
+        all_digits = all_digits[3:]
+        quotient -= 1
+
+    if mod == 0:
+        ans = ans[:-1]
+    if mod == 4:
+        ans += all_digits[:2] + "-" + all_digits[2:]
+    if mod == 2:
+        ans += all_digits
+
+    return ans
+# Time complexity: O(N)
+# Space complexity: O(1)
+
 # 1662. Check If Two String Arrays are Equivalent (Easy)
 def arrayStringsAreEqual(self, word1: List[str], word2: List[str]) -> bool:
     str1, str2 = "", ""
