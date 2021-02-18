@@ -52,6 +52,35 @@ ListNode* swapNodes(ListNode* head, int k) {
 // Time complexity: O(N)
 // Space complexity: O(1)
 
+// 1669. Merge In Between Linked Lists (Medium)
+ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
+    ListNode* list2Tail = NULL;
+    ListNode* curr = list2;
+    ListNode* prev = NULL;
+    while (curr->next) {
+        curr = curr->next;
+    }
+    list2Tail = curr;
+    curr = list1;
+    int i = 0;
+    while (curr) {
+        if (i == a) {
+            prev->next = list2;
+        }
+        if (i == b) {
+            ListNode* next = curr->next;
+            curr->next = NULL;
+            list2Tail->next = next;
+        }
+        prev = curr;
+        curr = curr->next;
+        i++;
+    }
+    return list1;
+}
+// Time complexity: O(N)
+// Space complexity: O(1)
+
 // 1367. Linked List in Binary Tree (Medium)
 // Easy explanation:
 bool isSubPath(ListNode* head, TreeNode* root) {
