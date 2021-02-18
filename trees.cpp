@@ -142,6 +142,19 @@ int minDepth(TreeNode* root) {
 // Time complexity: O(N)
 // Space complexity: O(h) with h being the height of the tree
 
+// 110. Balanced Binary Tree (Easy)
+bool isBalanced(TreeNode* root) {
+    if (!root) { return true; }
+    if (abs(height(root->left) - height(root->right)) > 1) { return false; }
+    return isBalanced(root->left) && isBalanced(root->right);
+}
+int height(TreeNode* root) {
+    if (!root) { return 0; }
+    return 1 + max(height(root->left), height(root->right));
+}
+// Time complexity: O(N)
+// Space complexity: O(h) with h being the height of the tree
+
 // 108. Convert Sorted Array to Binary Search Tree (Easy)
 TreeNode* sortedArrayToBST(vector<int>& nums) {
     if (nums.size() == 0) {
