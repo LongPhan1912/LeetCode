@@ -312,3 +312,27 @@ def findPeakElement(self, nums: List[int]) -> int:
 
 # Time complexity: O(logN)
 # Space complexity: O(1)
+
+# 74. Search a 2D Matrix (Medium)
+def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+    for row in matrix:
+        if target >= row[0] and target <= row[-1]:
+            # if target in row:
+            #     return True
+            lo = 0
+            hi = len(row)-1
+
+            while (lo <= hi):
+                mid = (hi+lo)//2
+                if row[mid] == target:
+                    return True
+                elif row[mid] > target:
+                    hi = mid - 1
+                else:
+                    lo = mid + 1
+
+
+    return False
+# Time complexity: O(logN)
+# Space complexity: O(1)
+
