@@ -242,6 +242,22 @@ def minSetSize(self, arr: List[int]) -> int:
 # Time complexity: O(n) // build heap / heapify and loops are O(n)
 # Space complexity: 0(n)
 
+# 832. Flipping an Image (Easy)
+def flipAndInvertImage(self, A: List[List[int]]) -> List[List[int]]:
+    for row in range(len(A)):
+        for col in range(len(A[0])//2):
+            A[row][col], A[row][len(A[0])-1-col] = A[row][len(A[0])-1-col], A[row][col]
+
+    for row in A:
+        for idx in range(len(row)):
+            row[idx] = 1 - row[idx]
+
+    return A
+
+# Time complexity: O(N^2)
+# Space complexity: 0(1)
+
+
 # 771. Jewels and Stones (Easy)
 def numJewelsInStones(self, jewels: str, stones: str) -> int:
     stoneTable = {}
