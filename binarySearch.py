@@ -1,3 +1,23 @@
+# 1498. Number of Subsequences That Satisfy the Given Sum Condition (Medium)
+def numSubseq(self, nums: List[int], target: int) -> int:
+    nums.sort()
+    ans = 0
+    lo = 0
+    hi = len(nums)-1
+    mod = 10**9+7 
+    # https://www.geeksforgeeks.org/modulo-1097-1000000007/
+
+    while (lo <= hi):
+        if nums[lo] + nums[hi] <= target:
+            ans += pow(2, hi-lo, mod)
+            lo += 1
+        else:
+            hi -= 1
+
+    return ans % mod
+# Time complexity: O(NlogN)
+# Space complexity: O(1)
+
 # 1351. Count Negative Numbers in a Sorted Matrix (Easy); 
 # technically the array is sorted already so the naive approach works fine
 def countNegatives(self, grid: List[List[int]]) -> int:
