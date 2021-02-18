@@ -198,6 +198,27 @@ def topKFrequent(self, nums: List[int], k: int) -> List[int]:
 # since it will determine the number of times a subarray with sum k has occured upto the current index. We increment the
 # count by the same amount.
 
+# 274. H-Index (Medium)
+def hIndex(self, citations: List[int]) -> int:
+    n = len(citations)
+    table = [0]*(n+1)
+
+    for c in citations:
+        if c >= n:
+            table[n] += 1
+        else:
+            table[c] += 1
+
+    hIdx = 0
+    for idx in range(n, -1, -1):
+        hIdx += table[idx]
+        if hIdx >= idx:
+            return idx
+
+    return 0
+# Time complexity: O(N)
+# Space complexity: O(N)
+
 # 12. Integer to Roman (Medium)
 def intToRoman(self, num: int) -> str:
     symbols = {
